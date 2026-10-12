@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0
+
+- `search` and `export` now return a flat `CnpjPage` (`records`, `totalCount`, `page`, `totalPages`, `pageSize`) instead of the raw API envelope.
+- `exportWithScroll` now returns a `CnpjScrollBatch` with `scrollId` and `hasMoreRecords` read from the API's `meta` block (the raw envelope has no top-level `scrollId`, so the 0.1.0 loop example never advanced).
+- New `iterate()` async generator that streams a whole result set across scroll batches, with an optional `maxRecords` cap.
+- `getByCnpj` normalises its input (`normalizeCnpjId`) and accepts a `scope` of extra filters.
+- README rewritten with live-verified examples, a sample record, recipes and known limitations. `examples/quickstart.ts` doubles as a live smoke test (`npm run test:live`).
+
 ## 0.1.0
 
-- Initial release. `CnpjClient` wrapper over `@companydata/companydata-sdk`, pinned to BR.
+- Initial release. `CnpjClient` wrapper over `@companydata/companydata-sdk`, pinned to Brazil.
+- `search`, lookup helper, `export`, `exportWithScroll`, and a `raw` escape hatch to the master client.
